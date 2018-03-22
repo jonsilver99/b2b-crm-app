@@ -1,0 +1,19 @@
+#full-invoice-sheet{
+    background: white;
+    padding: .75rem .75rem;
+}
+#full-invoice-sheet > h4{
+    background-image: linear-gradient(to right, #d35252, rgba(218, 77, 84, 0.75));
+    color: white;
+    padding: 1rem;
+    margin-top: 0;
+}
+
+#full-invoice-sheet > table td {
+    max-width: 34rem;
+}
+
+button{
+    width: 25%;
+    align-self: flex-end;
+}

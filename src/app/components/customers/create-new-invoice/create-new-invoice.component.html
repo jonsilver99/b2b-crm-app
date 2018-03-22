@@ -1,0 +1,75 @@
+<div *ngIf="NewInvoiceForm" class="main-content">
+    <div id="pageHead">
+        <h3 class="title">Send New invoice to customer: {{InvoiceFixedData.SuppliedTo.CompanyName}}</h3>
+    </div>
+
+    <div class="flexRow justify-content-center">
+        <div class="row flexRow justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <form [formGroup]="NewInvoiceForm" (ngSubmit)="onSubmit()">
+                        <div class="row underline">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Supplied by:
+                                        <span class="autoFilled">{{InvoiceFixedData.SuppliedBy.CompanyName}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Supplied to:
+                                        <span class="autoFilled">{{InvoiceFixedData.SuppliedTo.CompanyName}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Service Given</label>
+                                    <span class="invalid-notice" *ngIf="!NewInvoiceForm.get('ServiceGiven').valid && NewInvoiceForm.get('ServiceGiven').touched">
+                                        Required field
+                                    </span>
+                                    <textarea rows="5" formControlName="ServiceGiven" class="form-control" placeholder="Some details about the service/product supplied..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <span class="invalid-notice" *ngIf="!NewInvoiceForm.get('Price').valid && NewInvoiceForm.get('Price').touched">
+                                        Required field
+                                    </span>
+                                    <input type="number" formControlName="Price" class="form-control" placeholder="price in $">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Discount</label>
+                                    <input type="number" formControlName="Discount" class="form-control" placeholder="%">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Payment type (optional)</label>
+                                    <div>
+                                        <select formControlName="PaymentType" class="form-control" id="">
+                                            <option value='' selected>- N.A -</option>
+                                            <option value="cash">Cash</option>
+                                            <option value="credit">Credit</option>
+                                            <option value="check">Check</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info btn-fill pull-right">Send new invoice</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

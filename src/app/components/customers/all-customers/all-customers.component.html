@@ -1,0 +1,18 @@
+<div class="main-content">
+    <div id="pageHead">
+        <h3>My Customers</h3>
+    </div>
+    <div class="flexRow flex-wrap justify-content-center" id="CardsContainer">
+        <div appSelectCustomerToView class="list-card flexCol" *ngFor="let customer of myCustomers, let i = index" id="{{customer._id}}">
+            <div class="flexItem headItem">
+                <h4>{{customer.CompanyName}}</h4>
+            </div>
+            <div class="flexItem imgItem">
+                <img appImgPathResolver src="{{customer.LogoURL}}" alt="">
+            </div>
+            <div class="flexItem cptnItem">
+                <span>{{customer.About}}</span>
+            </div>
+        </div>
+    </div>
+</div>

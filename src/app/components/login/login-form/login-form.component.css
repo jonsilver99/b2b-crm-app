@@ -1,0 +1,17 @@
+.header{
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.header > h3{
+    margin-top: 10px;
+}
+
+form  {
+    width: 50% !important;
+}
+
+.form-group > button{
+    margin: auto;
+    width: 25%;
+}

@@ -1,0 +1,136 @@
+<div class="main-content">
+    <div class="header">
+        <h3 class="title">Company Registration</h3>
+        <a class="formSwitcher" (click)="navigateToLoginForm($event)">Already registered? - login here</a>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="content">
+                        <form [formGroup]="RegistrationForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        <span class="invalid-notice" *ngIf="!RegistrationForm.get('CompanyName').valid && RegistrationForm.get('CompanyName').touched">
+                                            <span *ngIf="RegistrationForm.get('CompanyName').errors.uniqueValue">
+                                                {{RegistrationForm.get('CompanyName').errors?.uniqueValue}}
+                                            </span>
+                                            <span *ngIf="RegistrationForm.get('CompanyName').errors.required">
+                                                Required field
+                                            </span>
+                                        </span>
+                                        <input type="text" formControlName="CompanyName" class="form-control" placeholder="Michellin Tires Inc">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Company #</label>
+                                        <span class="invalid-notice" *ngIf="!RegistrationForm.get('CompanyNumber').valid && RegistrationForm.get('CompanyNumber').touched">
+                                            <span *ngIf="RegistrationForm.get('CompanyNumber').errors.uniqueValue">
+                                                {{RegistrationForm.get('CompanyNumber').errors?.uniqueValue}}
+                                            </span>
+                                            <span *ngIf="RegistrationForm.get('CompanyNumber').errors.required">
+                                                Required field
+                                            </span>
+                                        </span>
+                                        <input type="number" formControlName="CompanyNumber" class="form-control" placeholder="#">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <span class="invalid-notice" *ngIf="!RegistrationForm.get('Country').valid && RegistrationForm.get('Country').touched">
+                                            Required field
+                                        </span>
+                                        <div id="countryInput">
+                                            <input type="text" formControlName="Country" class="form-control" placeholder="Country" (input)="autoSuggest()" #countryInput>
+                                            <div id="suggestionWrapper" *ngIf="CountriesData && CountriesData.SuggestionList.length > 0">
+                                                <ul>
+                                                    <li class="country-suggestion-li flexRow" *ngFor="let country of CountriesData.SuggestionList" id="{{country.name}}" (click)="onCountrypicked($event.currentTarget.id)">
+                                                        <div class="flex3 ellipsis">
+                                                            {{country.name}}
+                                                        </div>
+                                                        <div class="flex1">
+                                                            <img src="{{country.flag}}" alt="">
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" formControlName="Address" class="form-control" placeholder="Business Address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <span class="invalid-notice" *ngIf="!RegistrationForm.get('Username').valid && RegistrationForm.get('Username').touched">
+                                            <span *ngIf="RegistrationForm.get('Username').errors.uniqueValue">
+                                                {{RegistrationForm.get('Username').errors?.uniqueValue}}
+                                            </span>
+                                            <span *ngIf="RegistrationForm.get('Username').errors.required">
+                                                Required field
+                                            </span>
+                                        </span>
+                                        <input type="text" formControlName="Username" class="form-control" placeholder="User123">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Password</label>
+                                        <span class="invalid-notice" *ngIf="!RegistrationForm.get('Password').valid && RegistrationForm.get('Password').touched">
+                                            {{RegistrationForm.get('Password').errors.validnums}}
+                                        </span>
+                                        <input type="password" formControlName="Password" class="form-control" placeholder="include at least 1 digit">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Password Confirm</label>
+                                        <span class="invalid-notice" *ngIf="!RegistrationForm.get('PassConfirm').valid && RegistrationForm.get('PassConfirm').touched">
+                                            {{RegistrationForm.get('PassConfirm').errors?.passwordMatchErr}}
+                                        </span>
+                                        <input type="password" formControlName="PassConfirm" class="form-control" placeholder="repeat exact password field">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>About</label>
+                                        <textarea rows="5" formControlName="About" class="form-control" placeholder="Some company details.."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info btn-fill pull-right">Register</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-user">
+                    <label>Logo / Image</label>
+                    <input type="file" (change)="onFileLoaded()" #fileInput>
+                    <div id="companyImagePreview">
+                        <img [src]="companyLogoPreviewPath" alt="" (click)="openFileSelection()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

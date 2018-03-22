@@ -1,0 +1,45 @@
+<div id="pageHead" class="flexRow">
+    <div class="tab" [ngClass]="{'selected':ShowMyServiceProviders==true}" (click)="toggleMyServiceProviders();">
+        <h3>My Service Providers</h3>
+    </div>
+    <div class="tab" [ngClass]="{'selected':ShowAllCompanies==true}" (click)="toggleAllCompanies();">
+        <h3>All Companies</h3>
+    </div>
+</div>
+
+<!-- Show my service providers -->
+<div *ngIf="MyServicProviders && ShowMyServiceProviders" class="main-content">
+    <div class="flexRow flex-wrap justify-content-center" id="CardsContainer">
+        <div appSelectCompanyToView class="list-card flexCol" *ngFor="let company of MyServicProviders, let i = index" id="{{company._id}}" [attr.data-isProvider]="company.ImACustomer">
+            <div class="myServiceProvider" *ngIf="company.ImACustomer && company.ImACustomer==true">Your'e a customer</div>
+            <div class="flexItem headItem">
+                <h4>{{company.CompanyName}}</h4>
+            </div>
+            <div class="flexItem imgItem">
+                <img appImgPathResolver src="{{company.LogoURL}}" alt="">
+            </div>
+            <div class="flexItem cptnItem">
+                <span>{{company.About}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Show all companies -->
+<div *ngIf="AllCompanies && ShowAllCompanies" class="main-content">
+    <div class="flexRow flex-wrap justify-content-center" id="CardsContainer">
+        <div appSelectCompanyToView class="list-card flexCol" *ngFor="let company of AllCompanies, let i = index" id="{{company._id}}" [attr.data-isProvider]="company.ImACustomer">
+            <div class="myCompany" *ngIf="company.IsMyCompany && company.IsMyCompany==true">This is you</div>
+            <div class="myServiceProvider" *ngIf="company.ImACustomer && company.ImACustomer==true">Your'e a customer</div>
+            <div class="flexItem headItem">
+                <h4>{{company.CompanyName}}</h4>
+            </div>
+            <div class="flexItem imgItem">
+                <img appImgPathResolver src="{{company.LogoURL}}" alt="">
+            </div>
+            <div class="flexItem cptnItem">
+                <span>{{company.About}}</span>
+            </div>
+        </div>
+    </div>
+</div>

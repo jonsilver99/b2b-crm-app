@@ -1,0 +1,48 @@
+<div class="main-content">
+    <div id="pageHead">
+        <h3 class="title">My Invoices</h3>
+    </div>
+
+    <section id="companyInvoiceList" class="flexCol flex5">
+        <div id="tableWrap">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr id="headRow">
+                        <th>#</th>
+                        <th>Supplied by</th>
+                        <th>Supplied to</th>
+                        <th>Service given</th>
+                        <th>Date</th>
+                        <th>Discount</th>
+                        <th>Price</th>
+                        <th>Payment type</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let invoice of MyInvoices, let i = index" id="{{invoice._id}}" (click)="showInvoice(invoice)">
+                        <td>{{i}}</td>
+                        <td>{{invoice.SuppliedBy.CompanyName}}</td>
+                        <td>{{invoice.SuppliedTo.CompanyName}}</td>
+                        <td>{{invoice.ServiceGiven}}</td>
+                        <td>{{invoice.Date | date:'fullDate'}}</td>
+                        <td>{{invoice.Discount | percent}}</td>
+                        <td>{{invoice.Price | currency}}</td>
+                        <td>{{invoice.PaymentType}}</td>
+                        <td>
+                            <i *ngIf="invoice.Status=='Paid'" class="fa fa-check"></i>{{invoice.Status}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<!--***********************
+       Show Invoic 
+************************-->
+<div id="invoice-bg-screen" *ngIf="ShowingInvoice" (click)="hideInvoice()" class="flexCol align-items-center justify-content-center">
+    <app-show-full-invoice [Invoice]="ShowingInvoice" [ButtonText]="'Pay'"  (RedeemInvoice)="payInvoice($event);">
+    </app-show-full-invoice> 
+</div>

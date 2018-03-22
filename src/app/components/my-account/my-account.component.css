@@ -1,0 +1,9 @@
+.main-content{
+    padding: 1rem 2rem;
+    border: .5px solid gainsboro;
+    box-shadow: -2px 0px 5px #c5c5c5;
+}
+
+img{
+    max-width: 40rem;
+}

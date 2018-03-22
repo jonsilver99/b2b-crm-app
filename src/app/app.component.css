@@ -1,0 +1,15 @@
+#app-wrapper{
+    height: 100vh;
+}
+
+#header{
+    min-height: 8.5rem !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    background-image: linear-gradient(to right, #d35252, rgba(218, 77, 84, 0.75))
+}
+
+#body{
+    padding: 4rem 5rem 1rem;
+}

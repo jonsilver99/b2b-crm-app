@@ -1,0 +1,10 @@
+*{
+    box-sizing: border-box;
+}
+
+#CardsContainer{
+    height: 68vh;
+    overflow: auto;
+    border-bottom: 1px solid gainsboro;
+}
+

@@ -1,0 +1,24 @@
+<div class="main-content flexRow justify-content-center" id="{{CompanyData._id}}">
+    <div class="myServiceProvider" *ngIf="!isMyCompany && isMyServiceProvider">Your'e a customer</div>
+    <div class="myCompany" *ngIf="isMyCompany">This is you</div>
+    <div class="flexCol">
+        <div>
+            <h1>Welcome to {{CompanyData.CompanyName}}</h1>
+        </div>
+        <div class="flexRow justify-content-center">
+            <img id="companyImg" appImgPathResolver [src]="CompanyData.LogoURL" alt="">
+        </div>
+        <div class="flexCol align-items-center overflow-hidden">
+            <div class="flexRow align-items-center">
+                <h3 id="addressCaption">
+                    {{CompanyData.Address}}, {{CompanyData.Country}}
+                </h3>
+                <img id="countryFlagImg" src="{{CompanyData.CountryFlag}}" alt="">
+            </div>
+            <p>{{CompanyData.About}}</p>
+        </div>
+        <div id="become-client-btn-wrapper" *ngIf="!isMyCompany && !isMyServiceProvider" class="flexRow justify-content-center">
+            <button class="btn btn-info" (click)="becomeACustomer();">Become A client</button>
+        </div>
+    </div>
+</div>

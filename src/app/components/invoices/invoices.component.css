@@ -1,0 +1,45 @@
+section{
+    padding: 1rem 1rem;
+    border: 1px solid gainsboro;
+    max-height: 65vh;
+}
+
+#tableWrap{
+    height: 100%;
+    overflow: auto;
+
+}
+
+tr{
+    transition: all .10s linear !important;    
+}
+
+tr:hover:not(#headRow){
+    outline: 6px double dodgerblue !important;
+    box-shadow: 0 0 25px dodgerblue !important;
+    -webkit-transition: all .08s linear !important;
+    -moz-transition: all .08s linear !important;
+    transition: all .08s linear !important;
+    background: #8ce3ff8a;
+    cursor: pointer;
+}
+
+table td {
+    max-width: 24rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#invoice-bg-screen{
+    background: #505050cc;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+}
+
+i.fa.fa-check{
+    color: rgb(14, 179, 14);
+}

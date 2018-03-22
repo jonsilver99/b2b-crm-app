@@ -1,0 +1,34 @@
+<div id="full-invoice-sheet" class="flexCol">
+    
+    <h4>Invoice Id: {{Invoice._id}}</h4>
+    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr id="headRow">
+                <th>Supplied by</th>
+                <th>Supplied to</th>
+                <th>Service given</th>
+                <th>Date</th>
+                <th>Discount</th>
+                <th>Price</th>
+                <th>Payment type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{Invoice.SuppliedBy.CompanyName}}</td>
+                <td>{{Invoice.SuppliedTo.CompanyName}}</td>
+                <td>{{Invoice.ServiceGiven}}</td>
+                <td>{{Invoice.Date | date:'full'}}</td>
+                <td>{{Invoice.Discount | percent}}</td>
+                <td>{{Invoice.Price | currency}}</td>
+                <td>{{Invoice.PaymentType}}</td>
+                <td><i *ngIf="Invoice.Status=='Paid'" class="fa fa-check"></i>{{Invoice.Status}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-info" (click)="redeem($event)" [disabled]="Invoice.Status=='Paid'">{{ButtonText}}</button>
+
+</div>

@@ -1,0 +1,78 @@
+<div *ngIf="Customer" class="main-content">
+    <div id="pageHead">
+        <h3>{{Customer.CompanyName}} - Customer Summary</h3>
+    </div>
+    <div class="container-fluid">
+
+        <div id="customer-card" class="flexRow align-items-start">
+            <section id="companyInfo" class="flexCol flex2">
+                <div class="flexRow justify-content-center align-items-center imgItem">
+                    <img appImgPathResolver src="{{Customer.LogoURL}}" alt="">
+                </div>
+                <ul>
+                    <li>Company name: {{Customer.CompanyName}}</li>
+                    <li>Company #: {{Customer.CompanyNumber}}</li>
+                    <li>
+                        <div class="flexRow align-items-center">
+                            <div id="countryCaption">
+                                Country: {{Customer.Country}}
+                            </div>
+                            <img id="countryFlagImg" src="{{Customer.CountryFlag}}" alt="">
+                        </div>
+                    </li>
+                    <li>Address: {{Customer.Address}}</li>
+                    <li>About: {{Customer.About}}</li>
+                </ul>
+            </section>
+            <section id="companyInvoiceList" class="flexCol flex5">
+                <h4>
+                    Invoice List
+                    <span id="navigateToInvoiceCreation" (click)="navigateToInvoiceCreation()">
+                        <i class="fa fa-plus-square"></i>
+                        New Invoice
+                    </span>
+                </h4>
+                <div id="tableWrap">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr id="headRow">
+                                <th>#</th>
+                                <th>Supplied by</th>
+                                <th>Supplied to</th>
+                                <th>Service given</th>
+                                <th>Date</th>
+                                <th>Discount</th>
+                                <th>Price</th>
+                                <th>Payment type</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let invoice of Customer.Invoices, let i = index" id="{{invoice._id}}" (click)="showInvoice($event.currentTarget.id)">
+                                <td>{{i}}</td>
+                                <td>{{invoice.SuppliedBy.CompanyName}}</td>
+                                <td>{{invoice.SuppliedTo.CompanyName}}</td>
+                                <td>{{invoice.ServiceGiven}}</td>
+                                <td>{{invoice.Date | date:'fullDate'}}</td>
+                                <td>{{invoice.Discount | percent}}</td>
+                                <td>{{invoice.Price | currency}}</td>
+                                <td>{{invoice.PaymentType}}</td>
+                                <td>
+                                    <i *ngIf="invoice.Status=='Paid'" class="fa fa-check"></i>{{invoice.Status}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<!--***********************
+       Show Invoic 
+************************-->
+<div id="invoice-bg-screen" *ngIf="ShowingInvoice" (click)="hideInvoice()" class="flexCol align-items-center justify-content-center">
+    <app-show-full-invoice [Invoice]="ShowingInvoice" [ButtonText]="'Redeem'" (RedeemInvoice)="redeemInvoice($event);">
+    </app-show-full-invoice>
+</div>

@@ -1,1 +1,183 @@
-/* You can add global styles to this file, and also import other style files */
+/******************
+    General
+******************/
+
+html{
+    font-size: 16px;
+    /* font-size: 2.435vh; */
+}
+
+#pageHead{
+    border-bottom: 1.5px solid gainsboro; 
+    margin-bottom: 12.5px;   
+}
+
+.flexRow{
+    display: flex;
+}
+
+.flexCol{
+    display: flex;
+    flex-direction: column;
+}
+
+.flexHalfpoint{
+    flex:0.5;
+}
+
+.flex1{
+    flex:1;
+}
+
+.flex2{
+    flex:2;
+}
+.flex3{
+    flex:3;
+}
+.flex4{
+    flex:4;
+}
+.flex5{
+    flex:5;
+}
+.flex6{
+    flex:6;
+}
+
+.flex12{
+    flex:12;
+}
+
+.align-items-center{
+    align-items: center
+}
+
+.align-items-start{
+    align-items: flex-start;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
+/* Spacing */
+
+.marginize-sides{
+    margin: 0 1rem;
+}
+
+
+
+/****************************
+    Forms validation style
+****************************/
+input.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+textarea.ng-invalid.ng-touched{
+    border: 1px solid red;
+}
+
+span.invalid-notice{
+    color: red;
+    margin: 0 1vh;
+    font-size: 1.15rem;
+}
+
+
+
+/****************************
+    Login And Registration
+****************************/
+.formSwitcher{
+    position: absolute;
+    top: -1.25rem;
+    right: 1rem;
+    color: dodgerblue;
+    font-size: 1.25rem;
+}
+
+.formSwitcher:hover{
+    color: dodgerblue !important;
+    cursor: pointer;
+}
+
+
+
+/**************************************************************
+    'all-customers' and 'service-providers' shared styles 
+**************************************************************/
+.list-card{
+    padding: 0 1rem;
+    border: .5px solid gainsboro;
+    -webkit-box-shadow: -1px 0px 2px #929292;
+    box-shadow: -1px 0px 2px #929292;
+    width: 17%;
+    margin: 1rem;
+    height: 34vh;
+    -webkit-transition: all .05s linear;
+    transition: all .05s linear;
+    position: relative;
+    overflow: hidden;
+}
+
+.list-card:hover{
+    cursor: pointer;
+}
+
+.list-card.highlighted, div.highlighted{
+    width: 20% !important;
+    height: 37vh;
+    /* outline: 6px double dodgerblue !important;
+    box-shadow: 0 0 25px dodgerblue !important; */
+    -webkit-transition: all .08s linear !important;
+    -moz-transition: all .08s linear !important;
+    transition: all .08s linear !important;
+}
+
+
+
+
+.list-card .flexItem{
+    text-align: center;
+}
+
+.list-card .headItem > h4{
+    background: gainsboro;
+    padding: 1rem;
+}
+
+.list-card .cptnItem{
+    padding: .35rem;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    border-top: 1px solid gainsboro;
+
+
+    /* max-width: 24rem; */
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+
+
+}
+
+.list-card .imgItem{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+img{
+    max-width: 100%;
+}
