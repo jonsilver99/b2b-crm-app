@@ -3,9 +3,9 @@ import { InvoicesService } from '../../services/invoices.service';
 import { Invoice } from '../../models/interfaces';
 
 @Component({
-    selector: 'app-Invoices',
-    templateUrl: './Invoices.component.html',
-    styleUrls: ['./Invoices.component.css']
+    selector: 'app-invoices',
+    templateUrl: './invoices.component.html',
+    styleUrls: ['./invoices.component.css']
 })
 export class InvoicesComponent implements OnInit {
 
