@@ -33,7 +33,6 @@ export class AuthService {
                     }
                 })
                 .catch((err: HttpErrorResponse): Observable<any> => {
-                    debugger;
                     return Observable.throw(err)
                 });
         }

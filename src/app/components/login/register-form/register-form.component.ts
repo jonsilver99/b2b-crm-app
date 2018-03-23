@@ -1,16 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CompanyData, Country } from '../../../models/interfaces';
+import { CompanyData } from '../../../models/interfaces';
 import { environment } from '../../../../environments/environment';
 import { RegistrationService } from '../../../services/registration.service';
 import { CountriesService } from '../../../services/countries.service';
 import { FormValidatorsService } from '../../../services/form-validators.service';
-
-type CountriesData = {
-    countryList: Array<Country>,
-    SuggestionList: Array<Country>
-};
+import { CountriesData } from '../../../models/custom_types';
 
 @Component({
     selector: 'app-register-form',

@@ -7,16 +7,7 @@ import { AuthService } from '../../../services/auth.service';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { InvoicesService } from '../../../services/invoices.service';
-
-type side = {
-    CompanyId: any,
-    CompanyName: String
-};
-
-type InvoiceFixedData = {
-    SuppliedBy: side,
-    SuppliedTo: side
-};
+import { InvoiceFixedData } from '../../../models/custom_types';
 
 @Component({
     selector: 'app-create-new-invoice',

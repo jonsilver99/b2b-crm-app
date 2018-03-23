@@ -57,9 +57,3 @@ export interface Invoice {
     PaymentType: String,
     Status?: "Paid" | "Not-paid";
 }
-
-
-export type Country = {
-    flag: String,
-    name: String
-}

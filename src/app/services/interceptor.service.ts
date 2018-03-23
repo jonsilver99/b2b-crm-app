@@ -26,13 +26,11 @@ export class InterceptorService implements HttpInterceptor {
 
         return next.handle(req)
             .map((response: any) => {
-                debugger;
                 // console.log("Incoming server response intercepted:");
                 ClientNotifications.NotifySuccess(response);
                 return response;
             })
             .catch((err: HttpErrorResponse): Observable<any> => {
-                debugger;
                 ClientNotifications.NotifyError(err);
                 if (err.status == 401) {
                     this.router.navigate(['/Login']);
