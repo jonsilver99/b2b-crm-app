@@ -96,8 +96,8 @@ table td {
     text-overflow: ellipsis;
 }
 
-#invoice-bg-screen{
-    background: #505050cc;
+div#invoice-bg-screen{
+    background: rgba(49, 49, 49, 0.76);
     position: absolute;
     width: 100%;
     height: 100vh;
