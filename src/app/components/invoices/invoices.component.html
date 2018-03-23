@@ -43,6 +43,6 @@
        Show Invoic 
 ************************-->
 <div id="invoice-bg-screen" *ngIf="ShowingInvoice" (click)="hideInvoice()" class="flexCol align-items-center justify-content-center">
-    <app-show-full-invoice [Invoice]="ShowingInvoice" [ButtonText]="'Pay'"  (RedeemInvoice)="payInvoice($event);">
-    </app-show-full-invoice> 
+    <app-view-full-invoice [Invoice]="ShowingInvoice" [ButtonText]="'Pay'"  (RedeemInvoice)="payInvoice($event);">
+    </app-view-full-invoice> 
 </div>

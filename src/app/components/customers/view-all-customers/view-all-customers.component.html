@@ -3,7 +3,7 @@
         <h3>My Customers</h3>
     </div>
     <div class="flexRow flex-wrap justify-content-center" id="CardsContainer">
-        <div appSelectCustomerToView class="list-card flexCol" *ngFor="let customer of myCustomers, let i = index" id="{{customer._id}}">
+        <div appSelectCustomerToView class="list-card flexCol" *ngFor="let customer of MyCustomers, let i = index" id="{{customer._id}}">
             <div class="flexItem headItem">
                 <h4>{{customer.CompanyName}}</h4>
             </div>

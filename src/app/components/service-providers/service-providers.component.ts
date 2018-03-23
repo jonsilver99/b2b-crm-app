@@ -20,12 +20,12 @@ export class ServiceProvidersComponent implements OnInit {
     public ShowMyServiceProviders: Boolean = true;
 
     constructor(
-        private companiesDataService: CompaniesDataService,
-        private authService: AuthService
+        private CompaniesDataService: CompaniesDataService,
+        private AuthService: AuthService
     ) { }
 
     ngOnInit() {
-        this.companiesDataService.getAllCompanies()
+        this.CompaniesDataService.getAllCompanies()
             .subscribe(
             allCompanies => {
                 this.AllCompanies = allCompanies;
@@ -40,14 +40,12 @@ export class ServiceProvidersComponent implements OnInit {
             )
     }
 
-
     sortMyServiceProviders(): Array<any> {
         let myServiceProviders = this.AllCompanies.filter((company) => {
-            return company.Customers.includes(this.authService.AppLoginStatus.loggedInUser._id);
+            return company.Customers.includes(this.AuthService.AppLoginStatus.loggedInUser._id);
         })
         return myServiceProviders;
     }
-
 
     toggleMyServiceProviders() {
         this.ShowAllCompanies = false;
@@ -58,6 +56,4 @@ export class ServiceProvidersComponent implements OnInit {
         this.ShowAllCompanies = true;
         this.ShowMyServiceProviders = false;
     }
-
-
 }

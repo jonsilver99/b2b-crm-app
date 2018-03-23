@@ -13,14 +13,14 @@ export class LoginFormComponent implements OnInit {
     public LoginForm: FormGroup;
 
     constructor(
-        public router: Router,
-        public route?: ActivatedRoute,
-        public authService?: AuthService
+        public Router: Router,
+        public Route?: ActivatedRoute,
+        public AuthService?: AuthService
     ) { }
 
     ngOnInit() {
         this.initForm();
-        this.route.queryParams.subscribe((quryPrms) => {
+        this.Route.queryParams.subscribe((quryPrms) => {
             if (quryPrms && quryPrms.Username) {
                 this.LoginForm.patchValue({ 'Username': quryPrms.Username })
             }
@@ -36,7 +36,7 @@ export class LoginFormComponent implements OnInit {
 
     navigateToRegistrationForm(event) {
         event.preventDefault();
-        this.router.navigate(['/Login/RegisterForm']);
+        this.Router.navigate(['/Login/RegisterForm']);
     }
 
     onSubmit() {
@@ -45,7 +45,7 @@ export class LoginFormComponent implements OnInit {
                 Username: this.LoginForm.get('Username').value,
                 Password: this.LoginForm.get('Password').value
             }
-            this.authService.loginRequest(userData)
+            this.AuthService.loginRequest(userData)
                 .subscribe(
                     (res) => { console.log(res) },
 

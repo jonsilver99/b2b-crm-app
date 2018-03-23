@@ -6,29 +6,29 @@ import { CountriesService } from '../../../services/countries.service';
 import { InvoicesService } from '../../../services/invoices.service';
 
 @Component({
-    selector: 'app-view-this-costumer',
-    templateUrl: './view-this-costumer.component.html',
-    styleUrls: ['./view-this-costumer.component.css']
+    selector: 'app-view-this-customer',
+    templateUrl: './view-this-customer.component.html',
+    styleUrls: ['./view-this-customer.component.css']
 })
-export class ViewThisCostumerComponent implements OnInit {
+export class ViewThisCustomerComponent implements OnInit {
 
     public Customer: Customer
     public ShowingInvoice: Invoice | boolean = false;
 
     constructor(
-        private route: ActivatedRoute,
-        private customerDataService: CustomerDataService,
-        private invoicesService: InvoicesService,
+        private Route: ActivatedRoute,
+        private CustomerDataService: CustomerDataService,
+        private InvoicesService: InvoicesService,
         private Router: Router,
-        private countriesService: CountriesService
+        private CountriesService: CountriesService
     ) { }
 
     ngOnInit() {
 
-        this.route.queryParams.subscribe(qryPrms => {
+        this.Route.queryParams.subscribe(qryPrms => {
             if (qryPrms && qryPrms.customerId) {
                 let customerId = qryPrms.customerId;
-                this.customerDataService.getCurrentlyViewedCustomer(customerId)
+                this.CustomerDataService.getCurrentlyViewedCustomer(customerId)
                     .then((customer: Customer) => {
                         this.Customer = customer
                         this.getCountryFlag();
@@ -57,7 +57,7 @@ export class ViewThisCostumerComponent implements OnInit {
     }
 
     redeemInvoice(invoice: Invoice) {
-        this.invoicesService.updateInvoice(invoice)
+        this.InvoicesService.updateInvoice(invoice)
             .subscribe(
             res => { console.log(res) },
 
@@ -73,7 +73,7 @@ export class ViewThisCostumerComponent implements OnInit {
 
     getCountryFlag() {
         let thisCountryName = this.Customer.Country;
-        this.countriesService.getAllCountries().subscribe(
+        this.CountriesService.getAllCountries().subscribe(
             countries => {
                 for (let i = 0; i < countries.length; i++) {
                     if (countries[i].name == thisCountryName) {

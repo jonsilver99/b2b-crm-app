@@ -18,23 +18,23 @@ export class RegisterFormComponent implements OnInit {
     @ViewChild('fileInput') public fileInput: ElementRef;
     @ViewChild('countryInput') public CountryInputField: ElementRef;
     public CountriesData: CountriesData = {
-        countryList: [],
+        CountryList: [],
         SuggestionList: []
     }
-    public companyLogoPreviewPath: string = `${environment.BaseUrl}/assets/default-company-icon.png`
+    public CompanyLogoPath: string = `${environment.BaseUrl}/assets/default-company-icon.png`
     public RegistrationForm: FormGroup;
 
     constructor(
-        private router: Router,
-        private registerServ: RegistrationService,
-        private countriesService: CountriesService,
-        private formValidators: FormValidatorsService
+        private Router: Router,
+        private RegisterServ: RegistrationService,
+        private CountriesService: CountriesService,
+        private FormValidators: FormValidatorsService
     ) { }
 
     ngOnInit() {
-        this.countriesService.getAllCountries().subscribe(
+        this.CountriesService.getAllCountries().subscribe(
             allcountries => {
-                this.CountriesData.countryList = allcountries;
+                this.CountriesData.CountryList = allcountries;
             },
             err => {
                 alert('failed to fetch countries')
@@ -52,18 +52,18 @@ export class RegisterFormComponent implements OnInit {
             CompanyName: new FormControl('', [Validators.required], [this.asyncValidator.bind(this)]),
             CompanyNumber: new FormControl('', [Validators.required], [this.asyncValidator.bind(this)]),
             Username: new FormControl('', [Validators.required], [this.asyncValidator.bind(this)]),
-            Password: new FormControl('', [this.formValidators.passCheckForNums]),
+            Password: new FormControl('', [this.FormValidators.passCheckForNums]),
             PassConfirm: new FormControl('', [Validators.required]),
             Address: new FormControl('', []),
             Country: new FormControl('', [Validators.required]),
             About: new FormControl('', []),
         },
-            { validators: [this.formValidators.chkPasswordMatch] }, // this will validate that pass and passConfirm match at all times
+            { validators: [this.FormValidators.chkPasswordMatch] }, // this will validate that pass and passConfirm match at all times
         );
     }
 
     asyncValidator(control: AbstractControl) {
-        return this.formValidators.checkValueOnServer(control)
+        return this.FormValidators.checkValueOnServer(control)
     }
 
     openFileSelection() {
@@ -73,7 +73,7 @@ export class RegisterFormComponent implements OnInit {
     onFileLoaded() {
         let reader = new FileReader();
         reader.onloadend = (file: any) => {
-            this.companyLogoPreviewPath = file.target.result
+            this.CompanyLogoPath = file.target.result
         }
         reader.readAsDataURL(this.fileInput.nativeElement.files[0])
     }
@@ -82,7 +82,7 @@ export class RegisterFormComponent implements OnInit {
     autoSuggest() {
         let fieldValue = this.CountryInputField.nativeElement.value;
         if (fieldValue && fieldValue != '') {
-            let countrylist = this.CountriesData.countryList;
+            let countrylist = this.CountriesData.CountryList;
             this.CountriesData.SuggestionList = countrylist.filter((country) => {
                 return (country.name.toLowerCase()).indexOf(fieldValue.toLowerCase()) === 0;
             })
@@ -99,7 +99,7 @@ export class RegisterFormComponent implements OnInit {
     navigateToLoginForm(event?, username?) {
         if (event) event.preventDefault();
         if (!username) username = '';
-        this.router.navigate(['/Login/LoginForm'], { queryParams: { 'Username': username } });
+        this.Router.navigate(['/Login/LoginForm'], { queryParams: { 'Username': username } });
     }
 
     onSubmit() {
@@ -112,7 +112,7 @@ export class RegisterFormComponent implements OnInit {
             });
             companyData.append('CompanyLogo', this.fileInput.nativeElement.files[0])
 
-            this.registerServ.registerNewCompany(companyData)
+            this.RegisterServ.registerNewCompany(companyData)
                 .subscribe(
                 (res: any) => {
                     console.log(res);

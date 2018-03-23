@@ -1,6 +1,6 @@
 <div *ngIf="Customer" class="main-content">
     <div id="pageHead">
-        <h3>{{Customer.CompanyName}} - Customer Summary</h3>
+        <h3>{{Customer.CompanyName}} - Customer Profile</h3>
     </div>
     <div class="container-fluid">
 
@@ -26,7 +26,7 @@
             </section>
             <section id="companyInvoiceList" class="flexCol flex5">
                 <h4>
-                    Invoice List
+                    Invoice Summary
                     <span id="navigateToInvoiceCreation" (click)="navigateToInvoiceCreation()">
                         <i class="fa fa-plus-square"></i>
                         New Invoice
@@ -73,6 +73,6 @@
        Show Invoic 
 ************************-->
 <div id="invoice-bg-screen" *ngIf="ShowingInvoice" (click)="hideInvoice()" class="flexCol align-items-center justify-content-center">
-    <app-show-full-invoice [Invoice]="ShowingInvoice" [ButtonText]="'Redeem'" (RedeemInvoice)="redeemInvoice($event);">
-    </app-show-full-invoice>
+    <app-view-full-invoice [Invoice]="ShowingInvoice" [ButtonText]="'Redeem'" (RedeemInvoice)="redeemInvoice($event);">
+    </app-view-full-invoice>
 </div>

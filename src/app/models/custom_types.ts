@@ -20,7 +20,7 @@ export type Side = {
 /** Register form component **/
 // CountryList holds all countries objects. SuggestionList dynamically holds auto-suggestions that match user input 
 export type CountriesData = {
-    countryList: Array<Country>,
+    CountryList: Array<Country>,
     SuggestionList: Array<Country>
 };
 

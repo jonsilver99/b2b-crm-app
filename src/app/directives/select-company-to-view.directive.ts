@@ -17,7 +17,7 @@ export class SelectCompanyToViewDirective {
     navigateToCustomer() {
         let company_id = this.elRef.nativeElement.id;
         let isServiceProvider = this.elRef.nativeElement.dataset.isprovider || false;
-        this.router.navigate(['CompanyProfileCard'], { queryParams: { 'companyId': company_id, 'isProvider': isServiceProvider } })
+        this.router.navigate(['ViewCompanyProfile'], { queryParams: { 'companyId': company_id, 'isProvider': isServiceProvider } })
     }
 
     // hovering highlights

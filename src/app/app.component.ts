@@ -10,17 +10,17 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
     public LoginStatus: AppLoginStatus;
 
-    constructor(public authService: AuthService) {
-        this.LoginStatus = this.authService.AppLoginStatus;
+    constructor(public AuthService: AuthService) {
+        this.LoginStatus = this.AuthService.AppLoginStatus;
     }
 
     ngOnInit() {
         this.listenToLoginStatusChange();
-        this.authService.checkIfPreviousSessionExists();
+        this.AuthService.checkIfPreviousSessionExists();
     }
 
     listenToLoginStatusChange() {
-        this.authService.LoginStatusEmitter.subscribe(
+        this.AuthService.LoginStatusEmitter.subscribe(
             (changedStatus: AppLoginStatus) => {
                 this.LoginStatus = changedStatus;
                 console.log('new Login status:', this.LoginStatus)

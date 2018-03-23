@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Invoice } from '../../../models/interfaces';
 
 @Component({
-    selector: 'app-show-full-invoice',
-    templateUrl: './show-full-invoice.component.html',
-    styleUrls: ['./show-full-invoice.component.css']
+    selector: 'app-view-full-invoice',
+    templateUrl: './view-full-invoice.component.html',
+    styleUrls: ['./view-full-invoice.component.css']
 })
-export class ShowFullInvoiceComponent implements OnInit {
+export class ViewFullInvoiceComponent implements OnInit {
 
     @Input()
     public Invoice: Invoice

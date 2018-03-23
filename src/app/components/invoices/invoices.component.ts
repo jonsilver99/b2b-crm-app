@@ -13,12 +13,12 @@ export class InvoicesComponent implements OnInit {
     public ShowingInvoice: Invoice | boolean = false;
 
     constructor(
-        private invoicesService: InvoicesService
+        private InvoicesService: InvoicesService
 
     ) { }
 
     ngOnInit() {
-        this.invoicesService.getAllMyInvoices().subscribe(
+        this.InvoicesService.getAllMyInvoices().subscribe(
             (invoices: Array<Invoice>) => {
                 // console.log(invoices);
                 this.MyInvoices = invoices;
@@ -34,7 +34,7 @@ export class InvoicesComponent implements OnInit {
 
     payInvoice(invoice: Invoice) {
         invoice.Status = "Paid";
-        this.invoicesService.updateInvoice(invoice).subscribe(
+        this.InvoicesService.updateInvoice(invoice).subscribe(
             res => { console.log(res) },
 
             err => { console.log(err) },

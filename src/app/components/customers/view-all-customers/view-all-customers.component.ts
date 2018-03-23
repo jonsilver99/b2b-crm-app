@@ -5,22 +5,22 @@ import { environment } from '../../../../environments/environment';
 
 
 @Component({
-    selector: 'app-all-customers',
-    templateUrl: './all-customers.component.html',
-    styleUrls: ['./all-customers.component.css']
+    selector: 'app-view-all-customers',
+    templateUrl: './view-all-customers.component.html',
+    styleUrls: ['./view-all-customers.component.css']
   })
-export class AllCustomersComponent implements OnInit {
+export class ViewAllCustomersComponent implements OnInit {
 
-    public myCustomers: Array<Customer> = [];
+    public MyCustomers: Array<Customer> = [];
 
-    constructor(private customerDataService: CustomerDataService) { }
+    constructor(private CustomerDataService: CustomerDataService) { }
 
     ngOnInit() {
-        this.customerDataService.getAllMyCustomers()
+        this.CustomerDataService.getAllMyCustomers()
             .subscribe(
             customers => {
                 // console.log('My customers:', customers)
-                this.myCustomers = customers;
+                this.MyCustomers = customers;
             },
             err => {
                 console.log(err)

@@ -17,19 +17,19 @@ import { InvoiceFixedData } from '../../../models/custom_types';
 export class CreateNewInvoiceComponent implements OnInit {
 
     private Customer: Customer;
-    public InvoiceFixedData: InvoiceFixedData;
     public NewInvoiceForm: FormGroup;
+    public InvoiceFixedData: InvoiceFixedData;
 
     constructor(
-        private authService: AuthService,
-        private route: ActivatedRoute,
-        private customerDataService: CustomerDataService,
-        private invoicesService: InvoicesService,
-        private router: Router
+        private AuthService: AuthService,
+        private Route: ActivatedRoute,
+        private CustomerDataService: CustomerDataService,
+        private InvoicesService: InvoicesService,
+        private Router: Router
     ) { }
 
     ngOnInit() {
-        this.route.queryParams
+        this.Route.queryParams
             .map(qryPrms => {
                 if (qryPrms && qryPrms.customerId) {
                     return qryPrms.customerId;
@@ -55,13 +55,13 @@ export class CreateNewInvoiceComponent implements OnInit {
 
     initInvoiceFixedData(customerId) {
         // use logged-in user details and customer details to set both sides in the invoice (supplier & supplied)
-        return this.customerDataService.getCurrentlyViewedCustomer(customerId)
+        return this.CustomerDataService.getCurrentlyViewedCustomer(customerId)
             .then((customer: Customer) => {
                 this.Customer = customer
                 this.InvoiceFixedData = {
                     SuppliedBy: {
-                        CompanyId: this.authService.AppLoginStatus.loggedInUser._id,
-                        CompanyName: this.authService.AppLoginStatus.loggedInUser.CompanyName
+                        CompanyId: this.AuthService.AppLoginStatus.loggedInUser._id,
+                        CompanyName: this.AuthService.AppLoginStatus.loggedInUser.CompanyName
                     },
                     SuppliedTo: {
                         CompanyId: this.Customer._id,
@@ -88,12 +88,12 @@ export class CreateNewInvoiceComponent implements OnInit {
             Object.keys(this.NewInvoiceForm.controls).forEach(key => {
                 newInvoiceData[key] = this.NewInvoiceForm.get(key).value;
             });
-            this.invoicesService.SendNewInvoiceToCustomer(newInvoiceData)
+            this.InvoicesService.SendNewInvoiceToCustomer(newInvoiceData)
                 .subscribe(
                     (res: any) => {
                         console.log(res);
                         //upon successful invoice creation navigate back to customer summary page
-                        this.router.navigate(['Customers/ViewThisCustomer'], { queryParams: { 'customerId': this.Customer._id } })
+                        this.Router.navigate(['Customers/ViewThisCustomer'], { queryParams: { 'customerId': this.Customer._id } })
                     },
 
                     err => { console.log(err) },
