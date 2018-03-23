@@ -59,15 +59,11 @@ export class ViewThisCostumerComponent implements OnInit {
     redeemInvoice(invoice: Invoice) {
         this.invoicesService.updateInvoice(invoice)
             .subscribe(
-            res => {
-                alert(res);
-            },
-            err => {
-                console.log(err);
-            },
-            () => {
-                console.log('redeemInvoice method finished')
-            }
+            res => { console.log(res) },
+
+            err => { console.log(err) },
+
+            () => { console.log('redeemInvoice method finished') }
             )
     }
 

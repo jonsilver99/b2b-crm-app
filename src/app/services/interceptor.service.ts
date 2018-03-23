@@ -5,6 +5,7 @@ import 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
+import { ClientNotifications } from '../models/client_notifications';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
@@ -24,19 +25,19 @@ export class InterceptorService implements HttpInterceptor {
         }
 
         return next.handle(req)
-            .map((returned: any) => {
+            .map((response: any) => {
+                debugger;
                 // console.log("Incoming server response intercepted:");
-                return returned;
+                ClientNotifications.NotifySuccess(response);
+                return response;
             })
             .catch((err: HttpErrorResponse): Observable<any> => {
+                debugger;
+                ClientNotifications.NotifyError(err);
                 if (err.status == 401) {
                     this.router.navigate(['/Login']);
-                    let errMsg = err.message + ' : ' + err.error
-                    return Observable.throw(errMsg);
                 }
-                else {
-                    return Observable.throw(err);
-                }
+                return Observable.throw(err);
             })
     }
 

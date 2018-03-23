@@ -35,15 +35,11 @@ export class InvoicesComponent implements OnInit {
     payInvoice(invoice: Invoice) {
         invoice.Status = "Paid";
         this.invoicesService.updateInvoice(invoice).subscribe(
-            res => {
-                alert(res);
-            },
-            err => {
-                console.log(err);
-            },
-            () => {
-                console.log('payInvoice method finished')
-            }
+            res => { console.log(res) },
+
+            err => { console.log(err) },
+            
+            () => { console.log('payInvoice method finished') }
         )
     }
 
@@ -52,6 +48,6 @@ export class InvoicesComponent implements OnInit {
     }
 
     hideInvoice() {
-        this.ShowingInvoice = false;        
+        this.ShowingInvoice = false;
     }
 }

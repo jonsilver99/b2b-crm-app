@@ -33,6 +33,7 @@ export class AuthService {
                     }
                 })
                 .catch((err: HttpErrorResponse): Observable<any> => {
+                    debugger;
                     return Observable.throw(err)
                 });
         }
@@ -54,8 +55,7 @@ export class AuthService {
     }
 
     declareChangeInLoginStatus() {
-        // emit the current Login Status. Any subscribed components accross the app will listen to changes 
-        // and react accordingly  
+        // emit current Login Status. Any SUBSCRIBED components accross the app will react to changes accordingly  
         this.LoginStatusEmitter.next(this.AppLoginStatus);
     }
 

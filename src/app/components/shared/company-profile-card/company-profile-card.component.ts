@@ -70,7 +70,7 @@ export class CompanyProfileCardComponent implements OnInit {
         this.isMyServiceProvider = (initData.isProvider == "true");
         console.log('my servie provider?', this.isMyServiceProvider);
         if (!this.CompanyData) {
-            alert("Failed to fetch Company data from CompanyDataService");
+            alert("Failed to fetch Company data from 'CompanyDataService' - service has probably not been initialized");
         }
     }
 
@@ -79,19 +79,16 @@ export class CompanyProfileCardComponent implements OnInit {
         this.customerDataService.becomeACustomerOf(companyId)
             .subscribe(
             response => {
-                alert(response);
                 this.isMyServiceProvider = true;
             },
             err => {
                 if (err.hasOwnProperty('type') && err.type == 'companyId matches customerId') {
-                    alert(err.msg);
+                    alert(err.message);
                 } else {
                     console.log(err);
                 }
             },
-            () => {
-                console.log(`becomeACustomer method succeeded`);
-            }
+            () => { console.log(`becomeACustomer method succeeded`) }
             )
     }
 

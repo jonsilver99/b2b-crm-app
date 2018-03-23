@@ -29,7 +29,8 @@ export class FormValidatorsService {
         }
 
         let params = { 'fieldName': `${fieldname}`, 'fieldValue': `${fieldValue}` }
-        return this.httpReqs.get(`${environment.RegisterUrl}/validateFieldValue`, { params: params, responseType: 'text' }).toPromise()
+        return this.httpReqs.get(`${environment.RegisterUrl}/validateFieldValue`, { params: params, responseType: 'text' })
+            .toPromise()
             .then(response => {
                 return (response == 'Unique') ? null : { 'uniqueValue': `${fieldname} Already Exists` }
             })

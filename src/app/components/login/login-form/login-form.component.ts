@@ -45,31 +45,14 @@ export class LoginFormComponent implements OnInit {
                 Username: this.LoginForm.get('Username').value,
                 Password: this.LoginForm.get('Password').value
             }
-            this.authService.loginRequest(userData).subscribe(
-                (res) => {
-                    console.log(res);
-                },
-                (err) => {
-                    if (typeof err == 'string') {
-                        alert(err);
-                    } else {
-                        let invalidInput = err.error.invalidInput;
-                        if (invalidInput) {
-                            let msg = 'invalid inputs: ';
-                            for (let key in invalidInput) {
-                                msg += key + ' ' + invalidInput[key].join()
-                            }
-                            alert(msg)
-                        } else {
-                            alert(err.error)
-                        }
-                        console.log(err);
-                    }
-                },
-                () => {
-                    console.log("Login complete");
-                }
-            )
+            this.authService.loginRequest(userData)
+                .subscribe(
+                    (res) => { console.log(res) },
+
+                    (err) => { console.log(err) },
+
+                    () => { console.log("Login complete") }
+                )
         } else {
             alert('Invalid Form');
         }

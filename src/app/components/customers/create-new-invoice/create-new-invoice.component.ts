@@ -33,7 +33,7 @@ export class CreateNewInvoiceComponent implements OnInit {
         private authService: AuthService,
         private route: ActivatedRoute,
         private customerDataService: CustomerDataService,
-        private invoicesService: InvoicesService,        
+        private invoicesService: InvoicesService,
         private router: Router
     ) { }
 
@@ -63,7 +63,7 @@ export class CreateNewInvoiceComponent implements OnInit {
     }
 
     initInvoiceFixedData(customerId) {
-        // use customer details and logged-in user details to set both sides in the invoice (supplier & supplied)
+        // use logged-in user details and customer details to set both sides in the invoice (supplier & supplied)
         return this.customerDataService.getCurrentlyViewedCustomer(customerId)
             .then((customer: Customer) => {
                 this.Customer = customer
@@ -97,32 +97,17 @@ export class CreateNewInvoiceComponent implements OnInit {
             Object.keys(this.NewInvoiceForm.controls).forEach(key => {
                 newInvoiceData[key] = this.NewInvoiceForm.get(key).value;
             });
-            // this.customerDataService.SendNewInvoiceToCustomer(newInvoiceData)
             this.invoicesService.SendNewInvoiceToCustomer(newInvoiceData)
                 .subscribe(
-                (res: any) => {
-                    alert(res.msg);
-                    //upon successful invoice creation navigate back to customer summary page
-                    this.router.navigate(['Customers/ViewThisCustomer'], { queryParams: { 'customerId': this.Customer._id } })
-                },
-                err => {
-                    if (typeof err == 'string') {
-                        alert(err);
-                    } else {
-                        let invalidInput = err.error.invalidInput;
-                        if (invalidInput) {
-                            let msg = 'invalid inputs: ';
-                            for (let key in invalidInput) {
-                                msg += key + ' ' + invalidInput[key].join()
-                            }
-                            alert(msg)
-                        } else {
-                            alert(err.error)
-                        }
-                        console.log(err);
-                    }
-                },
-                () => { console.log('registration complete') }
+                    (res: any) => {
+                        console.log(res);
+                        //upon successful invoice creation navigate back to customer summary page
+                        this.router.navigate(['Customers/ViewThisCustomer'], { queryParams: { 'customerId': this.Customer._id } })
+                    },
+
+                    err => { console.log(err) },
+                    
+                    () => { console.log('registration complete') }
                 )
         } else {
             alert('Invalid Form');

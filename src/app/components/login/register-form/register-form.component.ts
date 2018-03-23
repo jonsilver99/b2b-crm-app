@@ -102,9 +102,7 @@ export class RegisterFormComponent implements OnInit {
 
     navigateToLoginForm(event?, username?) {
         if (event) event.preventDefault();
-        if (!username) {
-            username = '';
-        }
+        if (!username) username = '';
         this.router.navigate(['/Login/LoginForm'], { queryParams: { 'Username': username } });
     }
 
@@ -120,25 +118,11 @@ export class RegisterFormComponent implements OnInit {
 
             this.registerServ.registerNewCompany(companyData)
                 .subscribe(
-                (res: { success: boolean, msg: string }) => {
-                    alert(res.msg);
-                    if (res.success) {
-                        this.navigateToLoginForm(null, companyData.get('Username'))
-                    }
+                (res: any) => {
+                    console.log(res);
+                    if (res.successMsg) this.navigateToLoginForm(null, companyData.get('Username'))
                 },
-                err => {
-                    let invalidInput = err.error.invalidInput;
-                    if (invalidInput) {
-                        let msg = 'invalid inputs: ';
-                        for (let key in invalidInput) {
-                            msg += key + ' ' + invalidInput[key].join()
-                        }
-                        alert(msg)
-                    } else {
-                        alert(err.error)
-                    }
-                    console.log(err)
-                },
+                err => { console.log(err) },
                 () => { console.log('registration complete') }
                 )
         } else {

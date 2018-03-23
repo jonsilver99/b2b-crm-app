@@ -24,7 +24,7 @@ export class RouteGuardService implements CanActivate, CanActivateChild {
             } else {
                 return true;
             }
-            
+
         } else {
             // if requested requires a login state - verify that the login/session is valid 
             if (this.authService.AppLoginStatus.isLoggedIn && this.authService.AppLoginStatus.jwtToken) {
@@ -41,6 +41,7 @@ export class RouteGuardService implements CanActivate, CanActivateChild {
                         return Observable.throw(err);
                     });
             } else {
+                alert("Route Restricted - please log in first");
                 console.log("Route Restricted - please log in first");
                 this.router.navigate(['/Login']);
                 return false;

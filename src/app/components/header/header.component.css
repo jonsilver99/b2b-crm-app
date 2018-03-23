@@ -38,8 +38,8 @@ li{
     font-size: 1.65rem;
 }
 
-li.active{
-    background: #ffffff6e;
+#navButtons>li.active{
+    background: rgba(255, 255, 255, 0.473);
 }
 
 a{

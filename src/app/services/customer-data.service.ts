@@ -38,9 +38,12 @@ export class CustomerDataService {
         // the new customer will naturally be the user currently logged into the system      
         let newCustomerId = this.authService.AppLoginStatus.loggedInUser._id;
         if (companyId == newCustomerId) {
-            return Observable.throw({ type: 'companyId matches customerId', msg: 'Cant become a customer of youre own company' }).map(err => { return err })
+            return Observable.throw({
+                type: 'companyId matches customerId',
+                message: 'Cant become a customer of youre own company'
+            }).map(err => { return err })
         } else {
-            return this.httpReqs.post(environment.CustomersUrl, { companyId: companyId, newCustomerId: newCustomerId }, { responseType: 'text' });
+            return this.httpReqs.post(environment.CustomersUrl, { companyId: companyId, newCustomerId: newCustomerId }, { responseType: 'json' });
         }
     }
 }

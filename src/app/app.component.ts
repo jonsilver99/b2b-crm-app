@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     constructor(public authService: AuthService) {
         this.LoginStatus = this.authService.AppLoginStatus;
     }
-    
+
     ngOnInit() {
         this.listenToLoginStatusChange();
         this.authService.checkIfPreviousSessionExists();
@@ -25,14 +25,10 @@ export class AppComponent implements OnInit {
                 this.LoginStatus = changedStatus;
                 console.log('new Login status:', this.LoginStatus)
             },
-            (err) => {
-                alert(err);
-            },
-            () => {
-                alert('stopped listening to login status changes')
-            }
+            
+            (err) => { alert(err) },
+
+            () => { alert('stopped listening to login status changes') }
         )
     }
-
-
 }

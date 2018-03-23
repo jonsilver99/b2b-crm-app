@@ -21,8 +21,8 @@ export class InvoicesService {
 
     updateInvoice(invoice: Invoice) {
         return this.httpReqs.post(`${environment.InvoicesUrl}/${invoice._id}`, invoice)
-            .map((updatedInvoice: Invoice) => {
-                if (updatedInvoice.Status != "Paid") {
+            .map((response: { succesMsg: string, updatedInvoice: Invoice }) => {
+                if (response.updatedInvoice.Status != "Paid") {
                     invoice.Status = "Not-paid";
                     return Observable.throw("Something went wrong, seems like invoice didnt redeem - check invoices-service");
                 }
