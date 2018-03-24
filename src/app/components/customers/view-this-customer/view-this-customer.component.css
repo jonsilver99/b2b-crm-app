@@ -85,7 +85,7 @@ tr:hover:not(#headRow){
     -webkit-transition: all .08s linear !important;
     -moz-transition: all .08s linear !important;
     transition: all .08s linear !important;
-    background: #8ce3ff8a;
+    background: rgba(102, 218, 255, 0.54);
     cursor: pointer;
 }
 
