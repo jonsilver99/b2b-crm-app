@@ -23,8 +23,17 @@ export class AuthService {
             return Observable.of("Already Logged-in - login request aborted");
         }
         else {
-            return this.httpReqs.post(environment.LoginUrl, { user: userData }, { responseType: 'json' })
+            return this.httpReqs.post(
+                environment.LoginUrl,
+                { user: userData },
+                {
+                    responseType: 'json',
+                    reportProgress: true,
+                    observe: 'body'
+                }
+            )
                 .map((response: AppLoginStatus) => {
+                    debugger;
                     if (response.isLoggedIn) {
                         // Once login request has been authenticated - commence login!
                         this.commenceLogin(response);

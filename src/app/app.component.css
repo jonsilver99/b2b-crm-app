@@ -1,3 +1,20 @@
+#loaderWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    widows: 100vh;
+    background: white;
+}
+
+#loader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 3s infinite linear;
+}
+
+
 #app-wrapper{
     height: 100vh;
 }
@@ -12,4 +29,16 @@
 
 #body{
     padding: 4rem 5rem 1rem;
+}
+
+@keyframes spin{
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
 }

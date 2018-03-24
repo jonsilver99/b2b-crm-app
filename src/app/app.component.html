@@ -1,5 +1,9 @@
-<div id="app-wrapper" class="flexCol">
-
+<div id="loaderWrapper" *ngIf="ShowLoader">
+    <div id="loader">
+        <img src="{{BaseUrl}}/assets/spinner.png" alt="">
+    </div>
+</div>
+<div *ngIf="!ShowLoader" id="app-wrapper" class="flexCol">
     <header id="header" class="flex2">
         <app-header [LoginStatus]="LoginStatus"></app-header>
     </header>
@@ -12,5 +16,4 @@
         <app-footer></app-footer>
     </footer>
     <div></div>
-
 </div>

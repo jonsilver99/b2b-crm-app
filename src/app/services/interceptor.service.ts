@@ -1,39 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 import { ClientNotifications } from '../models/client_notifications';
+import { ShowLoaderService } from './show-loader.service';
 
 @Injectable()
 export class InterceptorService implements HttpInterceptor {
 
     constructor(
-        private authService: AuthService,
-        public router: Router
+        private AuthService: AuthService,
+        private Router: Router,
+        private ShowLoaderService: ShowLoaderService
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> | any {
         if (this.interceptionIsNeeded(req.url)) {
             req = req.clone({
                 setHeaders: {
-                    authorization: this.authService.AppLoginStatus.jwtToken
+                    authorization: this.AuthService.AppLoginStatus.jwtToken
                 }
             })
         }
 
         return next.handle(req)
             .map((response: any) => {
-                // console.log("Incoming server response intercepted:");
+                this.reportRequestProgress(response);
                 ClientNotifications.NotifySuccess(response);
                 return response;
             })
             .catch((err: HttpErrorResponse): Observable<any> => {
+                this.reportRequestProgress({ type: 4 });
                 ClientNotifications.NotifyError(err);
                 if (err.status == 401) {
-                    this.router.navigate(['/Login']);
+                    this.Router.navigate(['/Login']);
                 }
                 return Observable.throw(err);
             })
@@ -59,6 +62,17 @@ export class InterceptorService implements HttpInterceptor {
         } else {
             // if url is a public url - do not intercept
             return false
+        }
+    }
+
+    reportRequestProgress(response) {
+        if (response.type > 0 && response.type < 4) {
+            this.ShowLoaderService.IsRequestPending.next(true);
+        }
+        if (response.type >= 4) {
+            setTimeout(() => {
+                this.ShowLoaderService.IsRequestPending.next(false);
+            }, 450)
         }
     }
 }

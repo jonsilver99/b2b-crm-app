@@ -15,7 +15,7 @@ export class RegistrationService {
         if (this.authService.AppLoginStatus.isLoggedIn) {
             return Observable.of("Already Logged-in - registration request aborted");
         } else {
-            return this.httpReqs.post(environment.RegisterUrl, company, { responseType: 'json' })
+            return this.httpReqs.post(environment.RegisterUrl, company, { responseType: 'json', reportProgress: true })
                 .map((res: any) => {
                     return res;
                 })

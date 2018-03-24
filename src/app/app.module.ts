@@ -35,6 +35,7 @@ import { RouteGuardService } from './services/route-guard.service';
 import { InterceptorService } from './services/interceptor.service';
 import { FormValidatorsService } from './services/form-validators.service';
 import { AboutComponent } from './components/about/about.component';
+import { ShowLoaderService } from './services/show-loader.service';
 
 
 
@@ -76,6 +77,7 @@ import { AboutComponent } from './components/about/about.component';
         CountriesService,
         RouteGuardService,
         FormValidatorsService,
+        ShowLoaderService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: InterceptorService,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppLoginStatus } from './models/interfaces';
 import { AuthService } from './services/auth.service';
+import { ShowLoaderService } from './services/show-loader.service';
+import { environment } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -9,12 +11,18 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
     public LoginStatus: AppLoginStatus;
+    public ShowLoader: boolean = false;
+    public BaseUrl: string = environment.BaseUrl;
 
-    constructor(public AuthService: AuthService) {
+    constructor(
+        public AuthService: AuthService,
+        public ShowLoaderService: ShowLoaderService
+    ) {
         this.LoginStatus = this.AuthService.AppLoginStatus;
     }
 
     ngOnInit() {
+        this.listenToHttpRequests()
         this.listenToLoginStatusChange();
         this.AuthService.checkIfPreviousSessionExists();
     }
@@ -25,7 +33,20 @@ export class AppComponent implements OnInit {
                 this.LoginStatus = changedStatus;
                 console.log('new Login status:', this.LoginStatus)
             },
-            
+
+            (err) => { alert(err) },
+
+            () => { alert('stopped listening to login status changes') }
+        )
+    }
+
+    listenToHttpRequests() {
+        this.ShowLoaderService.IsRequestPending.subscribe(
+            (IsRequestPending) => {
+                debugger;
+                this.ShowLoader = IsRequestPending;
+            },
+
             (err) => { alert(err) },
 
             () => { alert('stopped listening to login status changes') }

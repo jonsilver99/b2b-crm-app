@@ -9,7 +9,9 @@ export class ClientNotifications {
             if ("successMsg" in response || "body" in response) {
                 let successMsg = response.successMsg || response.body.successMsg;
                 if (successMsg) {
-                    alert(successMsg);
+                    setTimeout(() => {
+                        alert(successMsg);
+                    }, 500)
                     if (response.status != 200) {
                         console.log('response status is not 200 - investigate:', response)
                     }
@@ -37,6 +39,8 @@ export class ClientNotifications {
         if (typeof error == "string") {
             message = error;
         }
-        alert(message);
+        setTimeout(() => {
+            alert(message);
+        }, 500)
     }
 }
