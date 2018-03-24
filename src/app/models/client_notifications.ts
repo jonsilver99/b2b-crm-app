@@ -2,7 +2,6 @@ import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
 
 export class ClientNotifications {
 
-
     static NotifySuccess(response: HttpResponse<any> | string | any) {
         // If there's a custome success message - Extract text/string and alert
         if (Object.keys(response).length > 0) {
