@@ -72,7 +72,7 @@ export class InterceptorService implements HttpInterceptor {
         if (response.type >= 4) {
             setTimeout(() => {
                 this.ShowLoaderService.IsRequestPending.next(false);
-            }, 249)
+            }, 600)
         }
     }
 }

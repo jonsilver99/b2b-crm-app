@@ -11,7 +11,7 @@ export class ClientNotifications {
                 if (successMsg) {
                     setTimeout(() => {
                         alert(successMsg);
-                    }, 251)
+                    }, 200)
                     if (response.status != 200) {
                         console.log('response status is not 200 - investigate:', response)
                     }
@@ -41,6 +41,6 @@ export class ClientNotifications {
         }
         setTimeout(() => {
             alert(message);
-        }, 251)
+        }, 200)
     }
 }
