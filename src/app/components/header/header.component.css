@@ -40,7 +40,7 @@ li{
 
 #navButtons>li.active{
     background: rgba(255, 255, 255, 0.473);
-    box-shadow: -1px 1px 2px #00000054
+    box-shadow: -2px 2px 3px #00000054
 }
 
 a{

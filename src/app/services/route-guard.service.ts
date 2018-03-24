@@ -18,7 +18,7 @@ export class RouteGuardService implements CanActivate, CanActivateChild {
         // if requested path is login, and user is already logged-in,  block the path and re-route to MyAccount 
         if (requestedRoute == 'Login' || requestedRoute == 'LoginForm' || requestedRoute == 'RegisterForm') {
             if (this.authService.AppLoginStatus.isLoggedIn) {
-                console.log('Route blocked - Already logged in');
+                console.log(requestedRoute, 'Route is blocked while logged-in');
                 this.router.navigate(['/MyAccount']);
                 return false;
             } else {

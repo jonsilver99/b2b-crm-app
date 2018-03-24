@@ -1,6 +1,7 @@
 import { NgModule, Component, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from '../components/about/about.component';
 import { LoginScreenComponent } from '../components/login-screen/login-screen.component';
 import { LoginFormComponent } from '../components/login-screen/login-form/login-form.component';
 import { RegisterFormComponent } from '../components/login-screen/register-form/register-form.component';
@@ -15,17 +16,18 @@ import { RouteGuardService } from '../services/route-guard.service';
 import { ViewCompanyProfileComponent } from '../components/shared/view-company-profile/view-company-profile.component';
 
 const appRoutes: Routes = [
+    { path: 'About', component: AboutComponent },
     {
-        path: 'Login', component: LoginScreenComponent, canActivate:[RouteGuardService], canActivateChild: [RouteGuardService], children: [
+        path: 'Login', component: LoginScreenComponent, canActivate: [RouteGuardService], canActivateChild: [RouteGuardService], children: [
             { path: 'LoginForm', component: LoginFormComponent },
             { path: 'RegisterForm', component: RegisterFormComponent },
             { path: '', redirectTo: 'LoginForm', pathMatch: 'full' },
             { path: '**', redirectTo: 'LoginForm', pathMatch: 'full' }
         ]
     },
-    { path: 'MyAccount', component: MyAccountComponent, canActivate:[RouteGuardService] },
+    { path: 'MyAccount', component: MyAccountComponent, canActivate: [RouteGuardService] },
     {
-        path: 'Customers', component: CustomersComponent, canActivate:[RouteGuardService], canActivateChild: [RouteGuardService], children: [
+        path: 'Customers', component: CustomersComponent, canActivate: [RouteGuardService], canActivateChild: [RouteGuardService], children: [
             { path: 'ViewAllCustomers', component: ViewAllCustomersComponent },
             { path: 'ViewThisCustomer', component: ViewThisCustomerComponent },
             { path: 'CreateNewInvoice', component: CreateNewInvoiceComponent },
@@ -33,9 +35,9 @@ const appRoutes: Routes = [
             { path: '**', redirectTo: 'ViewAllCustomers', pathMatch: 'full' }
         ]
     },
-    { path: 'ServiceProviders', component: ServiceProvidersComponent, canActivate:[RouteGuardService] },
-    { path: 'ViewCompanyProfile', component: ViewCompanyProfileComponent, canActivate:[RouteGuardService] },
-    { path: 'Invoices', component: InvoicesComponent, canActivate:[RouteGuardService] },
+    { path: 'ServiceProviders', component: ServiceProvidersComponent, canActivate: [RouteGuardService] },
+    { path: 'ViewCompanyProfile', component: ViewCompanyProfileComponent, canActivate: [RouteGuardService] },
+    { path: 'Invoices', component: InvoicesComponent, canActivate: [RouteGuardService] },
     { path: '', redirectTo: 'Login', pathMatch: 'full' },
     { path: '**', redirectTo: 'Login', pathMatch: 'full' }
 ];

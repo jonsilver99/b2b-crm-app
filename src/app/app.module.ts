@@ -34,6 +34,7 @@ import { InvoicesService } from './services/invoices.service';
 import { RouteGuardService } from './services/route-guard.service';
 import { InterceptorService } from './services/interceptor.service';
 import { FormValidatorsService } from './services/form-validators.service';
+import { AboutComponent } from './components/about/about.component';
 
 
 
@@ -57,6 +58,7 @@ import { FormValidatorsService } from './services/form-validators.service';
         ServiceProvidersComponent,
         ViewCompanyProfileComponent,
         SelectCompanyToViewDirective,
+        AboutComponent,
     ],
     imports: [
         ReactiveFormsModule,
