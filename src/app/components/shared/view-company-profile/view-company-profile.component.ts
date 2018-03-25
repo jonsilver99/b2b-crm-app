@@ -17,7 +17,6 @@ export class ViewCompanyProfileComponent implements OnInit {
 
     @Input()
     public CompanyData: CompanyData;
-    public CountryFlag: string;
     public IsMyCompany: boolean
     public IsMyServiceProvider: boolean;
 
@@ -98,7 +97,6 @@ export class ViewCompanyProfileComponent implements OnInit {
             countries => {
                 for (let i = 0; i < countries.length; i++) {
                     if (countries[i].name == thisCountryName) {
-                        // this.CountryFlag = countries[i].flag;
                         this.CompanyData.CountryFlag = countries[i].flag;
                     }
                 }

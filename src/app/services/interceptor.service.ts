@@ -67,12 +67,12 @@ export class InterceptorService implements HttpInterceptor {
 
     reportRequestProgress(response) {
         if (response.type > 0 && response.type < 4) {
-            this.ShowLoaderService.IsRequestPending.next(true);
+            // if http request in progress
+            this.ShowLoaderService.ShowLoader();
         }
         if (response.type >= 4) {
-            setTimeout(() => {
-                this.ShowLoaderService.IsRequestPending.next(false);
-            }, 600)
+            // if http request finished
+            this.ShowLoaderService.HideLoader();
         }
     }
 }

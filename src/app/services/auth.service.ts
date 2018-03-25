@@ -6,6 +6,7 @@ import { CompanyData, AppLoginStatus } from '../models/interfaces';
 import 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { ShowLoaderService } from './show-loader.service';
 
 @Injectable()
 export class AuthService {
@@ -14,8 +15,9 @@ export class AuthService {
     public LoginStatusEmitter: Subject<AppLoginStatus> = new Subject<AppLoginStatus>();
 
     constructor(
-        public httpReqs: HttpClient,
-        public router: Router,
+        private HttpReqs: HttpClient,
+        private Router: Router,
+        private ShowLoaderService: ShowLoaderService
     ) { }
 
     loginRequest(userData: { Username: string, Password: string }) {
@@ -23,7 +25,8 @@ export class AuthService {
             return Observable.of("Already Logged-in - login request aborted");
         }
         else {
-            return this.httpReqs.post(
+            this.ShowLoaderService.ShowLoader();
+            return this.HttpReqs.post(
                 environment.LoginUrl,
                 { user: userData },
                 {
@@ -33,7 +36,6 @@ export class AuthService {
                 }
             )
                 .map((response: AppLoginStatus) => {
-                    debugger;
                     if (response.isLoggedIn) {
                         // Once login request has been authenticated - commence login!
                         this.commenceLogin(response);
@@ -51,7 +53,7 @@ export class AuthService {
         this.AppLoginStatus = loginStatus;
         localStorage.setItem('CRM-App', JSON.stringify(this.AppLoginStatus));
         this.declareChangeInLoginStatus();
-        this.router.navigate(['/MyAccount']);
+        this.Router.navigate(['/MyAccount']);
         return `Logged-in as company: '${this.AppLoginStatus.loggedInUser.CompanyName}`;
     }
 
@@ -59,7 +61,7 @@ export class AuthService {
         // whenever navigation between local routes occures - this func checks the validity of the auth token.
         // this re-assures that expired/invalid sessions will be terminated 
         const header = new HttpHeaders({ 'authorization': this.AppLoginStatus.jwtToken });
-        return this.httpReqs.get(environment.VerifyLoginUrl, { headers: header, responseType: 'text' })
+        return this.HttpReqs.get(environment.VerifyLoginUrl, { headers: header, responseType: 'text' })
     }
 
     declareChangeInLoginStatus() {
@@ -71,7 +73,7 @@ export class AuthService {
         this.AppLoginStatus = { isLoggedIn: false, jwtToken: null, loggedInUser: null };
         localStorage.removeItem('CRM-App');
         this.declareChangeInLoginStatus();
-        this.router.navigate(['/Login']);
+        this.Router.navigate(['/Login']);
     }
 
     checkIfPreviousSessionExists(): void {

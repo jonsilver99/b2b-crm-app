@@ -9,16 +9,15 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class CustomerDataService {
 
-    public myCustomers: Array<Customer>;
-    private dataUpdate: Subject<any> = new Subject()
+    public MyCustomers: Array<Customer>;
 
     constructor(private httpReqs: HttpClient, private authService: AuthService) { }
 
     getAllMyCustomers() {
         return this.httpReqs.get(`${environment.AllMyCustomersUrl}/${this.authService.AppLoginStatus.loggedInUser._id}`)
             .map((data: { _id: string, Customers: Array<Customer> }) => {
-                this.myCustomers = data.Customers
-                return this.myCustomers;
+                this.MyCustomers = data.Customers
+                return this.MyCustomers;
             })
             .catch(err => {
                 return Observable.throw(err)

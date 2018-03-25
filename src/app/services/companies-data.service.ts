@@ -11,13 +11,13 @@ export class CompaniesDataService {
 
     public AllCompanies: Array<CompanyData | any>;
 
-    constructor(private httpReqs: HttpClient, private authService: AuthService) { }
+    constructor(private HttpReqs: HttpClient, private AuthService: AuthService) { }
 
     getAllCompanies() {
         // new HttpParams will use query-params instead of url param
-        let param = new HttpParams().set('loggedInUser', `${this.authService.AppLoginStatus.loggedInUser._id}`)
+        let param = new HttpParams().set('loggedInUser', `${this.AuthService.AppLoginStatus.loggedInUser._id}`)
 
-        return this.httpReqs.get(environment.CompaniesUrl, { params: param })
+        return this.HttpReqs.get(environment.CompaniesUrl, { params: param })
             .map((companies: Array<CompanyData>) => {
                 // console.log(companies);
                 this.AllCompanies = companies;

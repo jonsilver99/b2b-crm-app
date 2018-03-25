@@ -13,7 +13,6 @@ import { ImgPathResolverDirective } from './directives/img-path-resolver.directi
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { LoginFormComponent } from './components/login-screen/login-form/login-form.component';
 import { RegisterFormComponent } from './components/login-screen/register-form/register-form.component';
-
 import { CustomersComponent } from './components/customers/customers.component';
 import { ViewAllCustomersComponent } from './components/customers/view-all-customers/view-all-customers.component';
 import { SelectCustomerToViewDirective } from './directives/select-customer-to-view.directive';

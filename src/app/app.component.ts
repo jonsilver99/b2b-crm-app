@@ -43,7 +43,6 @@ export class AppComponent implements OnInit {
     listenToHttpRequests() {
         this.ShowLoaderService.IsRequestPending.subscribe(
             (IsRequestPending) => {
-                debugger;
                 this.ShowLoader = IsRequestPending;
             },
 
