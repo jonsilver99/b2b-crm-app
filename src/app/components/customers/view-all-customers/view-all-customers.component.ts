@@ -8,10 +8,11 @@ import { environment } from '../../../../environments/environment';
     selector: 'app-view-all-customers',
     templateUrl: './view-all-customers.component.html',
     styleUrls: ['./view-all-customers.component.css']
-  })
+})
 export class ViewAllCustomersComponent implements OnInit {
 
-    public MyCustomers: Array<Customer> = [];
+    public AllMyCustomers: Array<Customer> = [];
+    public ShowingCustomers: Array<Customer> = [];
 
     constructor(private CustomerDataService: CustomerDataService) { }
 
@@ -20,7 +21,8 @@ export class ViewAllCustomersComponent implements OnInit {
             .subscribe(
             customers => {
                 // console.log('My customers:', customers)
-                this.MyCustomers = customers;
+                this.AllMyCustomers = customers;
+                this.appendShowingCustomersArr();
             },
             err => {
                 console.log(err)
@@ -29,5 +31,18 @@ export class ViewAllCustomersComponent implements OnInit {
                 console.log('customer data fetched')
             }
             )
+    }
+
+    appendShowingCustomersArr() {
+        debugger;
+        let currentArrLength = this.ShowingCustomers.length
+        for (let i = currentArrLength; i < currentArrLength + 15; i++) {
+            if (i == this.AllMyCustomers.length) {
+                break;
+            }
+            if (!this.ShowingCustomers.includes(this.AllMyCustomers[i])) {
+                this.ShowingCustomers.push(this.AllMyCustomers[i])
+            }
+        }
     }
 }

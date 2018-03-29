@@ -1,5 +1,5 @@
 <div id="pageHead" class="flexRow">
-    <div class="tab" [ngClass]="{'selected':ShowMyServiceProviders==true}" (click)="toggleMyServiceProviders();">
+    <div class="tab" [ngClass]="{'selected':ShowServiceProviders==true}" (click)="toggleMyServiceProviders();">
         <h3>My Service Providers</h3>
     </div>
     <div class="tab" [ngClass]="{'selected':ShowAllCompanies==true}" (click)="toggleAllCompanies();">
@@ -8,37 +8,23 @@
 </div>
 
 <!-- Show my service providers -->
-<div *ngIf="MyServicProviders && ShowMyServiceProviders" class="main-content">
-    <div class="flexRow flex-wrap justify-content-center" id="CardsContainer">
-        <div appSelectCompanyToView class="list-card flexCol" *ngFor="let company of MyServicProviders, let i = index" id="{{company._id}}" [attr.data-isProvider]="company.ImACustomer">
-            <div class="myServiceProvider" *ngIf="company.ImACustomer && company.ImACustomer==true">Your'e a customer</div>
-            <div class="flexItem headItem">
-                <h4>{{company.CompanyName}}</h4>
-            </div>
-            <div class="flexItem imgItem">
-                <img appImgPathResolver src="{{company.LogoURL}}" alt="">
-            </div>
-            <div class="flexItem cptnItem">
-                <span>{{company.About}}</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Show all companies -->
-<div *ngIf="AllCompanies && ShowAllCompanies" class="main-content">
-    <div class="flexRow flex-wrap justify-content-center" id="CardsContainer">
-        <div appSelectCompanyToView class="list-card flexCol" *ngFor="let company of AllCompanies, let i = index" id="{{company._id}}" [attr.data-isProvider]="company.ImACustomer">
-            <div class="myCompany" *ngIf="company.IsMyCompany && company.IsMyCompany==true">This is you</div>
-            <div class="myServiceProvider" *ngIf="company.ImACustomer && company.ImACustomer==true">Your'e a customer</div>
-            <div class="flexItem headItem">
-                <h4>{{company.CompanyName}}</h4>
-            </div>
-            <div class="flexItem imgItem">
-                <img appImgPathResolver src="{{company.LogoURL}}" alt="">
-            </div>
-            <div class="flexItem cptnItem">
-                <span>{{company.About}}</span>
+<div class="main-content">
+    <div class="flexCol">
+        <div appLazyLoadOnScroll (DivBottomReached)="loadMoreData($event)" class="CardsContainer flex7 flexRow flex-wrap justify-content-center">
+            <div appSelectCompanyToView class="list-card flexCol" *ngFor="let company of ShowingCompanies, let i = index" id="{{company._id}}"
+                [attr.data-isProvider]="company.ImACustomer">
+                <div class="myServiceProvider" *ngIf="company.ImACustomer && company.ImACustomer==true">Your'e a customer</div>
+                <div class="myCompany" *ngIf="company.IsMyCompany && company.IsMyCompany==true">This is you</div>
+    
+                <div class="flexItem headItem">
+                    <h4>{{company.CompanyName}}</h4>
+                </div>
+                <div class="flexItem imgItem">
+                    <img appImgPathResolver src="{{company.LogoURL}}" alt="">
+                </div>
+                <div class="flexItem cptnItem">
+                    <span>{{company.About}}</span>
+                </div>
             </div>
         </div>
     </div>

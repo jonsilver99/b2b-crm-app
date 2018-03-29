@@ -2,9 +2,6 @@
     box-sizing: border-box;
 }
 
-h3{
-}
-
 .tab{
     margin-bottom: -1.5px;
     z-index: 100;
@@ -24,7 +21,7 @@ div.tab.selected{
     cursor: pointer;
 }
 
-#CardsContainer{
+div.CardsContainer{
     height: 68vh;
     overflow: auto;
     border-bottom: 1px solid gainsboro;
@@ -61,3 +58,27 @@ div.myCompany{
     text-align: center;
     opacity: 0.75;
 }
+
+
+/*Loading spinner*/
+/* #bottomSpace{}
+
+#loadingSpinner{
+    margin: 0 auto;
+    width: 4.5rem;
+    text-align: center;
+    display: block;
+    animation: spin 3s infinite linear;    
+}
+
+@keyframes spin{
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+} */

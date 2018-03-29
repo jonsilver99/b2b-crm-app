@@ -23,6 +23,8 @@ import { SelectCompanyToViewDirective } from './directives/select-company-to-vie
 import { ViewCompanyProfileComponent } from './components/shared/view-company-profile/view-company-profile.component';
 import { InvoicesComponent } from './components/invoices/invoices.component';
 import { ViewFullInvoiceComponent } from './components/shared/view-full-invoice/view-full-invoice.component';
+import { AboutComponent } from './components/about/about.component';
+import { LazyLoadOnScrollDirective } from './directives/lazy-load-on-scroll.directive';
 
 import { RegistrationService } from './services/registration.service';
 import { CountriesService } from './services/countries.service';
@@ -33,7 +35,6 @@ import { InvoicesService } from './services/invoices.service';
 import { RouteGuardService } from './services/route-guard.service';
 import { InterceptorService } from './services/interceptor.service';
 import { FormValidatorsService } from './services/form-validators.service';
-import { AboutComponent } from './components/about/about.component';
 import { ShowLoaderService } from './services/show-loader.service';
 
 
@@ -59,6 +60,7 @@ import { ShowLoaderService } from './services/show-loader.service';
         ViewCompanyProfileComponent,
         SelectCompanyToViewDirective,
         AboutComponent,
+        LazyLoadOnScrollDirective,
     ],
     imports: [
         ReactiveFormsModule,
