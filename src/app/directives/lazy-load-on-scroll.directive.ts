@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, HostListener, EventEmitter, Output, OnInit, ViewContainerRef, TemplateRef } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Output, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Directive({
@@ -13,7 +13,6 @@ export class LazyLoadOnScrollDirective implements OnInit {
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer2
     ) { }
 
     ngOnInit() {
