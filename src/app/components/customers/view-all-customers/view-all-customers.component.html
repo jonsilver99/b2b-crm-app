@@ -2,7 +2,7 @@
     <div id="pageHead">
         <h3>My Customers</h3>
     </div>
-    <div appLazyLoadOnScroll (DivBottomReached)="appendShowingCustomersArr($event)" class="CardsContainer flexRow flex-wrap justify-content-center">
+    <div appLazyLoadOnScroll (DivBottomReached)="loadMoreData($event)" class="CardsContainer flexRow flex-wrap justify-content-center">
         <div appSelectCustomerToView class="list-card flexCol" *ngFor="let customer of ShowingCustomers, let i = index" id="{{customer._id}}">
             <div class="flexItem headItem">
                 <h4>{{customer.CompanyName}}</h4>

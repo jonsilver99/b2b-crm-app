@@ -33,8 +33,14 @@ export class ViewAllCustomersComponent implements OnInit {
             )
     }
 
+    loadMoreData(scrolledDiv:HTMLElement) {
+        console.log('Bottom of div reached:', scrolledDiv);
+        setTimeout(() => {
+            this.appendShowingCustomersArr();
+        }, 200)
+    }
+
     appendShowingCustomersArr() {
-        debugger;
         let currentArrLength = this.ShowingCustomers.length
         for (let i = currentArrLength; i < currentArrLength + 15; i++) {
             if (i == this.AllMyCustomers.length) {
