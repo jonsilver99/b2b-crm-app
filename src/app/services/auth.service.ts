@@ -26,15 +26,7 @@ export class AuthService {
         }
         else {
             this.ShowLoaderService.ShowLoader();
-            return this.HttpReqs.post(
-                environment.LoginUrl,
-                { user: userData },
-                {
-                    responseType: 'json',
-                    reportProgress: true,
-                    observe: 'body'
-                }
-            )
+            return this.HttpReqs.post(environment.LoginUrl, { user: userData }, { reportProgress: true })
                 .map((response: AppLoginStatus) => {
                     if (response.isLoggedIn) {
                         // Once login request has been authenticated - commence login!
@@ -74,6 +66,8 @@ export class AuthService {
         localStorage.removeItem('CRM-App');
         this.declareChangeInLoginStatus();
         this.Router.navigate(['/Login']);
+        // refresh browser. this will reset all data services
+        window.location.reload() 
     }
 
     checkIfPreviousSessionExists(): void {

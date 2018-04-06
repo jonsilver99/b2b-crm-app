@@ -10,8 +10,6 @@ export class ViewFullInvoiceComponent implements OnInit {
 
     @Input()
     public Invoice: Invoice
-    @Input()
-    public ButtonText: String
     @Output()
     public RedeemInvoice: EventEmitter<Invoice> = new EventEmitter<Invoice>();
 

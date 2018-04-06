@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Invoice } from '../models/interfaces';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class InvoicesService {

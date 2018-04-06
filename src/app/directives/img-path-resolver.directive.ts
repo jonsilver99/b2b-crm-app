@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
+import { Directive, ElementRef, AfterViewInit } from '@angular/core';
 import { environment } from '../../environments/environment';
 
 @Directive({
@@ -11,7 +11,6 @@ export class ImgPathResolverDirective implements AfterViewInit {
 
     constructor(
         private elRef: ElementRef,
-        private renderer: Renderer2,
     ) { }
 
     onError() {

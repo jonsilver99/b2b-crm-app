@@ -11,8 +11,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
     public LoginStatus: AppLoginStatus;
-    public ShowLoader: boolean = false;
-    public BaseUrl: string = environment.BaseUrl;
+    public ShowLoadingSpinner: boolean = false;
 
     constructor(
         public AuthService: AuthService,
@@ -43,7 +42,7 @@ export class AppComponent implements OnInit {
     listenToHttpRequests() {
         this.ShowLoaderService.IsRequestPending.subscribe(
             (IsRequestPending) => {
-                this.ShowLoader = IsRequestPending;
+                this.ShowLoadingSpinner = IsRequestPending;
             },
 
             (err) => { alert(err) },

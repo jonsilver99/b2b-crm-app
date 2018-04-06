@@ -25,7 +25,9 @@ export interface CompanyData {
     Address?: String,
     About?: String
     LogoURL?: String,
-    Customers?: Array<any>
+    Customers?: Array<any>,
+    ImACustomer?:boolean|string,
+    IsMyCompany?:boolean|string
 }
 
 export interface Customer {

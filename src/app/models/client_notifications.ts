@@ -10,7 +10,7 @@ export class ClientNotifications {
                 if (successMsg) {
                     setTimeout(() => {
                         alert(successMsg);
-                    }, 200)
+                    }, 1)
                     if (response.status != 200) {
                         console.log('response status is not 200 - investigate:', response)
                     }
@@ -21,6 +21,7 @@ export class ClientNotifications {
     }
 
     static NotifyError(error: HttpErrorResponse | string | any) {
+        debugger;
         // Extract text/string message
         let message;
         if (Object.keys(error).length > 0) {
@@ -32,7 +33,7 @@ export class ClientNotifications {
                     message += key + ' ' + invalidInput[key].join() + '\n';
                 }
             } else {
-                message = error.error || error.message || 'Error: (no error response message found) - check console'
+                message = error.error.message || error.error || error.message || 'Error: (no error response message found) - check console'
             }
         }
         if (typeof error == "string") {
@@ -40,6 +41,6 @@ export class ClientNotifications {
         }
         setTimeout(() => {
             alert(message);
-        }, 200)
+        }, 1)
     }
 }

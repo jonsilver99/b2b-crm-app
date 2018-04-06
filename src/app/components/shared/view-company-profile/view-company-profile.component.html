@@ -1,6 +1,6 @@
 <div class="main-content flexRow justify-content-center" id="{{CompanyData._id}}">
-    <div class="myServiceProvider" *ngIf="!IsMyCompany && IsMyServiceProvider">Your'e a customer</div>
-    <div class="myCompany" *ngIf="IsMyCompany">This is you</div>
+    <div class="myServiceProvider" *ngIf="!CompanyData.IsMyCompany && CompanyData.ImACustomer">Your'e a customer</div>
+    <div class="myCompany" *ngIf="CompanyData.IsMyCompany && !CompanyData.ImACustomer">This is you</div>
     <div class="flexCol">
         <div>
             <h1>Welcome to {{CompanyData.CompanyName}}</h1>
@@ -17,7 +17,7 @@
             </div>
             <p>{{CompanyData.About}}</p>
         </div>
-        <div id="become-client-btn-wrapper" *ngIf="!IsMyCompany && !IsMyServiceProvider" class="flexRow justify-content-center">
+        <div id="become-client-btn-wrapper" *ngIf="!CompanyData.IsMyCompany && !CompanyData.ImACustomer" class="flexRow justify-content-center">
             <button class="btn btn-info" (click)="becomeACustomer();">Become A client</button>
         </div>
     </div>

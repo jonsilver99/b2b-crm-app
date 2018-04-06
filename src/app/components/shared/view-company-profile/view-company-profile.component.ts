@@ -17,8 +17,10 @@ export class ViewCompanyProfileComponent implements OnInit {
 
     @Input()
     public CompanyData: CompanyData;
-    public IsMyCompany: boolean
-    public IsMyServiceProvider: boolean;
+
+    // company relation flags
+    // public IsMyCompany: boolean
+    // public IsMyServiceProvider: boolean;
 
     constructor(
         private CompanyDataService: CompaniesDataService,
@@ -55,30 +57,38 @@ export class ViewCompanyProfileComponent implements OnInit {
                 }
                 )
         } else {
-            this.IsMyCompany = true;
+            this.CompanyData.IsMyCompany = true;
             console.log('this is my company');
         }
         this.getCountryFlag();
     }
 
     initCompanyData(initData) {
-        if (initData.companyId == this.AuthService.AppLoginStatus.loggedInUser._id) {
-            this.IsMyCompany = true;
-        }
         this.CompanyData = this.CompanyDataService.fetchOneCompanyFromArray(initData.companyId);
-        this.IsMyServiceProvider = (initData.isProvider == "true");
-        console.log('my servie provider?', this.IsMyServiceProvider);
+        this.checkCompanyRelationFlags(this.CompanyData, initData)
+
         if (!this.CompanyData) {
             alert("Failed to fetch Company data from 'CompanyDataService' - service has probably not been initialized");
         }
     }
 
+    checkCompanyRelationFlags(CompanyData: CompanyData, initData) {
+        let userid = this.AuthService.AppLoginStatus.loggedInUser._id
+        // console.log(this.CompanyData)
+        if (CompanyData.IsMyCompany && initData.companyId == userid) {
+            console.log('This is my company')
+        }
+        if (CompanyData.ImACustomer && initData.isProvider == "true") {
+            console.log('This is my service provider');
+        }
+    }
+
     becomeACustomer() {
         let companyId = this.CompanyData._id;
-        this.CustomerDataService.becomeACustomerOf(companyId)
+        this.CompanyDataService.becomeACustomerOf(companyId)
             .subscribe(
-            response => {
-                this.IsMyServiceProvider = true;
+            (updatedCompany:CompanyData) => {
+                this.CompanyData = updatedCompany;
             },
             err => {
                 if (err.hasOwnProperty('type') && err.type == 'companyId matches customerId') {

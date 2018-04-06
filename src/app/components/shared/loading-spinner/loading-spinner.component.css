@@ -1,0 +1,40 @@
+:host{
+    width: 100%;
+}
+
+
+.fullscreen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: white;
+}
+
+.fullscreen > #spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 3s infinite linear;
+}
+
+.small{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.small > #spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 3s infinite linear;
+    width: 50px;  
+    height: 100%;  
+}
+
+.small > #spinner > img{
+    height: 100%;
+}

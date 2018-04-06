@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentRef, ComponentFactoryResolver } from '@angular/core';
 import { Customer } from '../../../models/interfaces';
 import { CustomerDataService } from '../../../services/customer-data.service';
 import { environment } from '../../../../environments/environment';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 
 @Component({
@@ -11,44 +12,60 @@ import { environment } from '../../../../environments/environment';
 })
 export class ViewAllCustomersComponent implements OnInit {
 
-    public AllMyCustomers: Array<Customer> = [];
     public ShowingCustomers: Array<Customer> = [];
 
-    constructor(private CustomerDataService: CustomerDataService) { }
+    // Data loading spinner...
+    @ViewChild('LoadingSpinnerEntry', { read: ViewContainerRef })
+    public LoadingSpinnerEntry: ViewContainerRef
+    public LoadingSpinner: ComponentRef<LoadingSpinnerComponent>
+    public LoadingInprogress: boolean = false
+
+    constructor(
+        private CustomerDataService: CustomerDataService,
+        private ComponentResolver: ComponentFactoryResolver
+    ) { }
 
     ngOnInit() {
-        this.CustomerDataService.getAllMyCustomers()
-            .subscribe(
-            customers => {
-                // console.log('My customers:', customers)
-                this.AllMyCustomers = customers;
-                this.appendShowingCustomersArr();
-            },
-            err => {
-                console.log(err)
-            },
-            () => {
-                console.log('customer data fetched')
-            }
-            )
+        this.appendShowingCustomersArr();
     }
 
-    loadMoreData(scrolledDiv:HTMLElement) {
-        console.log('Bottom of div reached:', scrolledDiv);
+    loadMoreData(scrolledDiv: HTMLElement) {
+        // load more data (only if loading is not already in progress)
+        if (!this.LoadingInprogress) {
+            console.log('Bottom of container-div reached');
+            this.revealLoadingSpinner(scrolledDiv);
+            this.LoadingInprogress = true;
+            setTimeout(() => {
+                this.appendShowingCustomersArr()
+                    .then((result: string) => {
+                        if (result == 'data-fetch complete') {
+                            this.hideLoadingSpinner(scrolledDiv);
+                            this.LoadingInprogress = false;
+                        }
+                    });
+            }, 250)
+        }
+    }
+
+    revealLoadingSpinner(scrolledDiv: HTMLElement) {
+        const spinnerCreator = this.ComponentResolver.resolveComponentFactory(LoadingSpinnerComponent)
+        this.LoadingSpinner = this.LoadingSpinnerEntry.createComponent(spinnerCreator);
+        this.LoadingSpinner.instance.FullScreen = false
         setTimeout(() => {
-            this.appendShowingCustomersArr();
-        }, 200)
+            scrolledDiv.scrollTo(0, scrolledDiv.scrollHeight);
+        }, 0)
+    }
+
+    hideLoadingSpinner(scrolledDiv: HTMLElement) {
+        this.LoadingSpinner.destroy();
+        scrolledDiv.scrollTo(0, scrolledDiv.scrollTop - 10);
     }
 
     appendShowingCustomersArr() {
-        let currentArrLength = this.ShowingCustomers.length
-        for (let i = currentArrLength; i < currentArrLength + 15; i++) {
-            if (i == this.AllMyCustomers.length) {
-                break;
-            }
-            if (!this.ShowingCustomers.includes(this.AllMyCustomers[i])) {
-                this.ShowingCustomers.push(this.AllMyCustomers[i])
-            }
-        }
+        return this.CustomerDataService.getMyCustomers()
+            .then(Customers => {
+                this.ShowingCustomers = Customers;
+                return 'data-fetch complete'
+            })
     }
 }

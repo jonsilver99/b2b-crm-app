@@ -29,6 +29,6 @@
         </tbody>
     </table>
 
-    <button class="btn btn-info" (click)="redeem($event)" [disabled]="Invoice.Status=='Paid'">{{ButtonText}}</button>
+    <button class="btn btn-info" (click)="redeem($event)" [disabled]="Invoice.Status=='Paid'"><ng-content></ng-content></button>
 
 </div>

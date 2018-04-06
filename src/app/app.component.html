@@ -1,9 +1,6 @@
-<div id="loaderWrapper" *ngIf="ShowLoader">
-    <div id="loader">
-        <img src="{{BaseUrl}}/assets/spinner.png" alt="">
-    </div>
-</div>
-<div *ngIf="!ShowLoader" id="app-wrapper" class="flexCol">
+<app-loading-spinner *ngIf="ShowLoadingSpinner"></app-loading-spinner>
+
+<div *ngIf="!ShowLoadingSpinner" id="app-wrapper" class="flexCol">
     <header id="header" class="flex2">
         <app-header [LoginStatus]="LoginStatus"></app-header>
     </header>

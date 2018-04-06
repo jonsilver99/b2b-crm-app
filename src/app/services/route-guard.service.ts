@@ -33,7 +33,8 @@ export class RouteGuardService implements CanActivate, CanActivateChild {
                         if (verification == 'ok') {
                             return true
                         } else {
-                            this.router.navigate(['/Login']);
+                            console.log('Auth token expired or not verified - logging out')
+                            this.authService.logout();
                             return false;
                         }
                     }).first()

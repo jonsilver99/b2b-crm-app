@@ -36,6 +36,7 @@ import { RouteGuardService } from './services/route-guard.service';
 import { InterceptorService } from './services/interceptor.service';
 import { FormValidatorsService } from './services/form-validators.service';
 import { ShowLoaderService } from './services/show-loader.service';
+import { LoadingSpinnerComponent } from './components/shared/loading-spinner/loading-spinner.component';
 
 
 
@@ -61,6 +62,7 @@ import { ShowLoaderService } from './services/show-loader.service';
         SelectCompanyToViewDirective,
         AboutComponent,
         LazyLoadOnScrollDirective,
+        LoadingSpinnerComponent,
     ],
     imports: [
         ReactiveFormsModule,
@@ -85,6 +87,7 @@ import { ShowLoaderService } from './services/show-loader.service';
             multi: true
         }
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [LoadingSpinnerComponent]
 })
 export class AppModule { }
